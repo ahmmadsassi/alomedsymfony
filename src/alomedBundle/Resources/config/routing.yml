@@ -1,0 +1,71 @@
+alomed_homepage:
+    path:     /
+    defaults: { _controller: alomedBundle:Default:index }
+index_homepage:
+    path:     /index
+    defaults: { _controller: alomedBundle:Livreur:showalllivreur }
+create_homepage:
+    path:  /livreur
+    defaults: { _controller: alomedBundle:Livreur:createlivreur }
+view_homepage:
+    path: /livreur/{id}
+    defaults: { _controller: alomedBundle:Livreur:getlivreurbyid }
+rechercher_homepage:
+    path: /rech
+    defaults: { _controller: alomedBundle:Livreur:rechrercher }
+update_homepage:
+    path: /update/{id}
+    defaults: { _controller: alomedBundle:Livreur:updatelivreur }
+delete_homepage:
+    path: /delete/{id}
+    defaults: { _controller: alomedBundle:Livreur:deletelivreur }
+pharmacie_index:
+    path:     /in
+    defaults: { _controller: "alomedBundle:Pharmacie:index" }
+    methods:  GET
+pharmacie_show:
+    path:     /{id}/show
+    defaults: { _controller: "alomedBundle:Pharmacie:show" }
+    methods:  GET
+pharmacie_new:
+    path:     /new
+    defaults: { _controller: "alomedBundle:Pharmacie:new" }
+    methods:  [GET, POST]
+pharmacie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "alomedBundle:Pharmacie:edit" }
+    methods:  [GET, POST]
+pharmacie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "alomedBundle:Pharmacie:delete" }
+    methods:  DELETE
+index_medecinhomepage:
+    path:     /indexmedecin
+    defaults: { _controller: alomedBundle:Medecin:showallmedecin }
+create_medecinhomepage:
+        path: /medecin
+        defaults: { _controller: alomedBundle:Medecin:createmedecin }
+view_homepagemedecin:
+        path: /medecin/{id}
+        defaults: { _controller: alomedBundle:Medecin:getmedecinbyid }
+delete_homepagemedecin:
+    path: /deletemedecin/{id}
+    defaults: { _controller: alomedBundle:Medecin:deletemedecin }
+update_homepagemedecin:
+    path: /updatemedecin/{id}
+    defaults: { _controller: alomedBundle:Medecin:updatemedecin }
+index_patienthomepage:
+    path:     /indexpatient
+    defaults: { _controller: alomedBundle:Patient:showallpatient }
+create_patienthomepage:
+    path:     /patient
+    defaults: { _controller: alomedBundle:Patient:createpatient }
+view_patienthomepage:
+    path:  /patient/{id}
+    defaults: { _controller: alomedBundle:Patient:getpatientbyid }
+delete_homepagepatient:
+    path: /deletepatient/{id}
+    defaults: { _controller: alomedBundle:Patient:deletepatient }
+update_homepagepatient:
+    path: /updatepatient/{id}
+    defaults: { _controller: alomedBundle:Patient:updatepatient}

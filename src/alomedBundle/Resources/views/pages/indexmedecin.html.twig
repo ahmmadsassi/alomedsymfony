@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home page </title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet"  href="{{ asset('css/style1.css') }}" />
+    <link rel="stylesheet"  href="{{ asset('css/2.css') }}" />
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<nav >
+
+<div class="logo">
+    <img src="{{ asset('css/logo.jpg') }}" style="width: 120px">
+</div>
+<label for="btn" class="icon">
+    <span class="fa fa-bars"></span>
+</label>
+<input type="checkbox" id="btn">
+    <ul>
+        <li>
+            <a href="{{ absolute_url(asset('')) }}app_dev.php/indexmedecin">MÉDECIN</a>
+        </li>
+        <li><a href="{{ absolute_url(asset('')) }}app_dev.php/indexpatient">Patient</a></li>
+        <li>
+            <a href="{{ absolute_url(asset('')) }}app_dev.php/index">LIVREUR</a>
+        </li>
+        <li><a href="index.html">|  SE DÉCONNECTER</a></li>
+    </ul>
+</nav>
+<body class="back" >
+
+<h1 id="Liste">LISTE DES MEDECINS</h1>
+<div class="container">
+
+    <table class="table ">
+        <thead>
+        <tr id="champs">
+            <th>ID</th>
+            <th>NOM</th>
+            <th>PRENOM</th>
+            <th>DATE DE NAISSANCE</th>
+            <th>E-MAIL</th>
+            <th>MOT DE PASSE</th>
+            <th>TELEPHONE</th>
+            <th>ADDRESSE CABINET</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for liv in medecin %}
+            <td>{{ liv.id }}</td>
+            <td>{{ liv.nom }}</td>
+            <td>{{ liv.prenom }}</td>
+            <td>{{  liv.getDateDeNaissance()|date('d-m-Y')}}</td>
+            <td>{{ liv.email}}</td>
+            <td>{{ liv.password}}</td>
+            <td>{{ liv.telephone}}</td>
+            <td>{{ liv.addressecabinet}}</td>
+            <td><a href="{{ absolute_url(asset('')) }}app_dev.php/medecin/{{ liv.id }}" class="glyphicon glyphicon-eye-open " id="a" aria-hidden="true" ></a>&nbsp;&nbsp
+                <a href="{{ absolute_url(asset('')) }}app_dev.php/updatemedecin/{{ liv.id }}" class="glyphicon glyphicon-pencil" id="a" aria-hidden="true"></a>&nbsp;&nbsp
+                <a href="{{ absolute_url(asset('')) }}app_dev.php/deletemedecin/{{ liv.id }}" class="glyphicon glyphicon-trash" id="a" aria-hidden="true"></a>&nbsp;&nbsp
+            </td>
+        </tr>
+        {% else %}
+            <tr>
+                <td>
+                    no data found
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    <a href="{{ absolute_url(asset(''))}}app_dev.php/medecin" id="a1">
+        <button class="btn btn-primary">
+            <span id="plus" class="glyphicon glyphicon-plus" aria-hidden="true">
+                <span class="p"> Créer un médecin</span>
+            </span>
+        </button>
+    </a>
+</div>
+
+</body>
+</html>

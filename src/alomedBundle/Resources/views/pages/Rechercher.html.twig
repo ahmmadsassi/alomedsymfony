@@ -1,0 +1,27 @@
+<h1>Rechercher d'un livreur</h1>
+<form  action="" method="POST">
+      Recherche :<input type="text" name="input_recherche"/>
+    <input type="Submit" name="rechercher" value="Rechercher"/>
+</form>
+{% if livreur is empty %}
+Aucun livreur trouver
+{% else %}
+<table>
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Adresse</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for liv in livreur %}
+        <tr>
+            <td>{{ liv.nom }}</td>
+            <td>{{ liv.prenom }}</td>
+            <td>{{ liv.adresse }}</td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

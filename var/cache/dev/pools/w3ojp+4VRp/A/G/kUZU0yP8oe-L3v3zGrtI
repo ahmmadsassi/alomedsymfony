@@ -1,0 +1,3 @@
+0
+%255BalomedBundle%255CEntity%255CMedecin%2524ordonnances%255D%255B1%255D
+a:1:{i:0;O:30:"Doctrine\ORM\Mapping\OneToMany":6:{s:8:"mappedBy";s:7:"medecin";s:12:"targetEntity";s:30:"alomedBundle\Entity\Ordonnance";s:7:"cascade";N;s:5:"fetch";s:4:"LAZY";s:13:"orphanRemoval";b:1;s:7:"indexBy";N;}}
