@@ -39,6 +39,26 @@ private $Dateconsultation;
     /**
      * @return mixed
      */
+    public function getPharmacie()
+    {
+        return $this->pharmacie;
+    }
+
+    /**
+     * @param mixed $pharmacie
+     */
+    public function setPharmacie($pharmacie)
+    {
+        $this->pharmacie = $pharmacie;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="alomedBundle\Entity\Pharmacie", inversedBy="ordonnancesph")
+     */
+    private $pharmacie;
+    /**
+     * @return mixed
+     */
     public function getPatient()
     {
         return $this->patient;
@@ -114,10 +134,5 @@ private $Dateconsultation;
     {
         $this->medecin = $medecin;
     }
-
-
-
-
-
 
 }

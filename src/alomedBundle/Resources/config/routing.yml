@@ -1,6 +1,24 @@
 alomed_homepage:
     path:     /
     defaults: { _controller: alomedBundle:Default:index }
+alomed_about:
+    path:     /about
+    defaults: { _controller: alomedBundle:Default:indexabout }
+alomed_contact:
+        path: /contact
+        defaults: { _controller: alomedBundle:Default:indexcontact }
+alomed_role:
+    path: /role
+    defaults: { _controller: alomedBundle:Default:indexrole }
+about_homepage:
+    path:     /
+    defaults: { _controller: alomedBundle:Default:about }
+role_homepage:
+    path:     /
+    defaults: { _controller: alomedBundle:Default:role }
+contact_homepage:
+        path: /
+        defaults: { _controller: alomedBundle:Default:contact }
 index_homepage:
     path:     /index
     defaults: { _controller: alomedBundle:Livreur:showalllivreur }
@@ -34,7 +52,6 @@ pharmacie_new:
 pharmacie_edit:
     path:     /{id}/edit
     defaults: { _controller: "alomedBundle:Pharmacie:edit" }
-    methods:  [GET, POST]
 pharmacie_delete:
     path:     /{id}/delete
     defaults: { _controller: "alomedBundle:Pharmacie:delete" }
@@ -63,9 +80,58 @@ create_patienthomepage:
 view_patienthomepage:
     path:  /patient/{id}
     defaults: { _controller: alomedBundle:Patient:getpatientbyid }
+view_patientlistelivraison:
+    path:  /listelivraison
+    defaults: { _controller: alomedBundle:Pharmacie:showalllivraisonph }
 delete_homepagepatient:
     path: /deletepatient/{id}
     defaults: { _controller: alomedBundle:Patient:deletepatient }
 update_homepagepatient:
     path: /updatepatient/{id}
     defaults: { _controller: alomedBundle:Patient:updatepatient}
+creation:
+    path:     /ordennance
+    defaults: { _controller: alomedBundle:ordennance:creation }
+
+createlivraison:
+    path:     /createlivraison
+    defaults: { _controller: alomedBundle:livraison:createlivraison }
+medecin_interface:
+    path: /interfacemedecin
+    defaults: { _controller: alomedBundle:Medecin:showallordennance}
+pharmacie_interface:
+    path: /interfacepharmacie
+    defaults: { _controller: alomedBundle:Pharmacie:showallordennanceph}
+livreur_interface:
+    path: /interfacelivreur
+    defaults: { _controller: alomedBundle:Livreur:showalllivraison}
+patient_interface:
+    path: /interfacepatient
+    defaults: { _controller: alomedBundle:Patient:showalllivraison}
+deco_interface:
+    path: /deconcter
+    defaults: { _controller: alomedBundle:Patient:deconction}
+view_livraison:
+    path:  /livraisonview/{id}
+    defaults: { _controller: alomedBundle:Patient:getlivraisonbyid }
+confirmer_livraison:
+    path:  /livraisonconfirmer/{id}
+    defaults: { _controller: alomedBundle:Patient:livrer }
+security_login2:
+    path: /login2
+    defaults: { _controller: alomedBundle:Securitypatient:verifpatient }
+security_login4:
+    path: /login4
+    defaults: { _controller: alomedBundle:Securitypatient:veriflivreur }
+security_login1:
+    path: /login1
+    defaults: { _controller: alomedBundle:Securitypatient:verifadminme }
+security_login:
+    path: /login
+    defaults: { _controller: alomedBundle:Securitypatient:medecinverif }
+security_login3:
+    path: /login3
+    defaults: { _controller: alomedBundle:Securitypatient:phverfif }
+
+
+

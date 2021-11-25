@@ -1,7 +1,12 @@
+hotel:
+    resource: "@HotelBundle/Resources/config/routing.yml"
+    prefix:   /
+
 alomed:
     resource: "@alomedBundle/Resources/config/routing.yml"
     prefix:   /
-
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+        # app/config/routing.yml
+

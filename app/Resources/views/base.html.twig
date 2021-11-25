@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<body>
+<header class="header">
+    <ul class="navi">
+        <li><a href="{{ path('security_login') }}">Login</a></li>
+    </ul>
+</header>
+</body>
 </html>

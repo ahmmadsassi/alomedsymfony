@@ -1,0 +1,47 @@
+
+#a {
+    size: 50px;
+    color: darkred;
+}
+#a1:hover{
+    text-decoration: none;
+}
+#plus {
+    size: 50px;
+    color: white;
+}
+.p{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.back{
+    background-image: url("pat.jpg");
+    background-position-y:15% ;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.container{
+    margin-top: 20px;
+}
+#Liste{
+    color: #2b669a;
+    margin-left:14%;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+#champs{
+    color: #2b669a;
+    background-color: white;
+    opacity: 0.7;
+}
+table{
+    background-image:url("pat.jpg");
+    background-size: cover;
+    background-position-y: -170px;
+    background-position-x: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px ;
+    /*backdrop-filter: blur(2px);*/
+}

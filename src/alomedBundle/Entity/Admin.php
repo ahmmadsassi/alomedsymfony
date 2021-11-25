@@ -2,63 +2,62 @@
 
 
 namespace alomedBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Admin
  * @package alomedBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="alomedBundle\Repository\AdminRepository")
  */
 class Admin
 {
     /**
-     * @ORM\GeneratedValue
      * @ORM\Id
-     * @ORM\Column (type="integer")
+     * @ORM\GeneratedValue
+     *@ORM\Column (type="integer")
      */
-  private  $id;
+    private $idadmin;
+
     /**
      * @ORM\Column (type="string")
      */
-  private  $username;
+    private $email;
 
-
-  /**
-   * @ORM\Column (type="string")
-   */
-   private  $password;
+    /**
+     * @ORM\Column (type="string")
+     */
+    private $password;
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getIdadmin()
     {
-        return $this->id;
+        return $this->idadmin;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $idadmin
      */
-    public function setId($id)
+    public function setIdadmin($idadmin)
     {
-        $this->id = $id;
+        $this->idadmin = $idadmin;
     }
 
     /**
      * @return mixed
      */
-    public function getUsername()
+    public function getEmail()
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
-     * @param mixed $username
+     * @param mixed $email
      */
-    public function setUsername($username)
+    public function setEmail($email)
     {
-        $this->username = $username;
+        $this->email = $email;
     }
 
     /**
@@ -76,4 +75,9 @@ class Admin
     {
         $this->password = $password;
     }
+
+
+
+
+
 }

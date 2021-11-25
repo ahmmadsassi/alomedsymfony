@@ -4,6 +4,7 @@
 namespace alomedBundle\Form;
 
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,6 +21,9 @@ class Formordonnance extends AbstractType
                 'attr' => ['class' => 'form-control '],
                 'label'=>'Medicaments ',
                 'required'=>False,])
+            ->add('medecin',EntityType::class,array('class'=>'alomedBundle\Entity\Medecin','choice_label'=>'nom','attr' => ['class' => 'dropdown','class'=>'btn btn-secondary dropdown-toggle']))
+            ->add('patient',EntityType::class,array('class'=>'alomedBundle\Entity\Patient','choice_label'=>'nom'))
+            ->add('pharmacie',EntityType::class,array('class'=>'alomedBundle\Entity\Pharmacie','choice_label'=>'nom'))
             ->add('save', SubmitType::class, [
                 'attr' => ['class' =>' btn btn-success'],
                 'label'=>'save'

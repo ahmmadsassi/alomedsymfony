@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Pharmacie
  * @package alomedBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="alomedBundle\Repository\PharmacienRepository")
  */
 class Pharmacie
 {
@@ -39,16 +39,37 @@ class Pharmacie
      */
     private $medicaments;
     /**
+     * @ORM\OneToMany(targetEntity="alomedBundle\Entity\Ordonnance", mappedBy="pharmacie",orphanRemoval=true)
+     */
+    private $ordonnanceph;
+    public function __construct()
+    {
+        $this->ordonnanceph = new ArrayCollection();
+        $this->livraisons = new ArrayCollection();
+        $this->medicaments=new ArrayCollection();
+    }
+    /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
     }
-    public function __construct()
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrdonnanceph()
     {
-        $this->livraisons = new ArrayCollection();
-        $this->medicaments=new ArrayCollection();
+        return $this->ordonnanceph;
+    }
+
+    /**
+     * @param ArrayCollection $ordonnanceph
+     */
+    public function setOrdonnanceph($ordonnanceph)
+    {
+        $this->ordonnanceph = $ordonnanceph;
     }
 
     /**
@@ -121,6 +142,47 @@ class Pharmacie
     {
         $this->prenom = $prenom;
     }
+    /**
+     * @ORM\Column (type="string",length=255)
+     */
+    private $password;
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @ORM\Column (type="string",length=255)
+     */
+    private $email;
 
     /**
      * @return mixed

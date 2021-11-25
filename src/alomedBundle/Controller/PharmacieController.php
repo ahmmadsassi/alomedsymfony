@@ -2,7 +2,12 @@
 
 namespace alomedBundle\Controller;
 
+use alomedBundle\Entity\Medicaments;
+use alomedBundle\Entity\Patient;
 use alomedBundle\Entity\Pharmacie;
+use alomedBundle\Entity\userid;
+use alomedBundle\Form\Medicammentform;
+use alomedBundle\Form\ModeleForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -64,6 +69,15 @@ class PharmacieController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    public function showallordennancephAction(Request $request){
+        $userid= new userid();
+        $userid= $this->getDoctrine()->getRepository('alomedBundle:userid')->find(1);
+        $id= $userid->getToken();
+
+        $pharmacie= $this->getDoctrine()->getRepository('alomedBundle:Pharmacie')->find($id);
+        $ordennances = $pharmacie->getOrdonnanceph();
+        return $this->render('@alomed/pages/interfacepharmacie.html.twig',array('ordennances' => $ordennances));
+    }
 
     /**
      * Displays a form to edit an existing pharmacie entity.
@@ -87,7 +101,14 @@ class PharmacieController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+    public function showalllivraisonphAction(Request $request){
+        $userid= new userid();
+        $userid= $this->getDoctrine()->getRepository('alomedBundle:userid')->find(1);
+        $id= $userid->getToken();
+        $livreur= $this->getDoctrine()->getRepository('alomedBundle:Pharmacie')->find($id);
+        $livraisons = $livreur->getLivraisons();
+        return $this->render('@alomed/pages/listelivraison.html.twig',array('livraison' => $livraisons));
+    }
     /**
      * Deletes a pharmacie entity.
      *
@@ -106,6 +127,7 @@ class PharmacieController extends Controller
         return $this->redirectToRoute('pharmacie_index');
     }
 
+
     /**
      * Creates a form to delete a pharmacie entity.
      *
@@ -121,4 +143,7 @@ class PharmacieController extends Controller
             ->getForm()
         ;
     }
+
+
+
 }

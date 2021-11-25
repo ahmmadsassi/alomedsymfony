@@ -9,7 +9,7 @@ use alomedBundle\Entity\Carte_identite_professionnelle_electronique;
 /**
  * Class Medecin
  * @package alomedBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="alomedBundle\Repository\MedecinRepository")
  */
 class Medecin
 {

@@ -18,6 +18,7 @@
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="alomedBundle">alomedBundle\alomedBundle</parameter>
+      <parameter key="HotelBundle">HotelBundle\HotelBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -70,6 +71,11 @@
         <parameter key="path">/opt/lampp/htdocs/Alomed1/src/alomedBundle</parameter>
         <parameter key="namespace">alomedBundle</parameter>
       </parameter>
+      <parameter key="HotelBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/opt/lampp/htdocs/Alomed1/src/HotelBundle</parameter>
+        <parameter key="namespace">HotelBundle</parameter>
+      </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
         <parameter key="path">/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle</parameter>
@@ -107,11 +113,11 @@
     <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
-    <parameter key="mailer_user">null</parameter>
-    <parameter key="mailer_password">null</parameter>
+    <parameter key="mailer_user">sassiahmed147852@gmail.com</parameter>
+    <parameter key="mailer_password">mypass</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="locale">en</parameter>
-    <parameter key="fragment.renderer.hinclude.global_template"></parameter>
+    <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
     <parameter key="kernel.secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="kernel.http_method_override">true</parameter>
@@ -131,9 +137,15 @@
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
     <parameter key="asset.request_context.base_path"></parameter>
     <parameter key="asset.request_context.secure">false</parameter>
+    <parameter key="templating.loader.cache.path">null</parameter>
+    <parameter key="templating.engines" type="collection">
+      <parameter>twig</parameter>
+    </parameter>
     <parameter key="validator.mapping.cache.prefix"></parameter>
     <parameter key="validator.mapping.cache.file">/opt/lampp/htdocs/Alomed1/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
+    <parameter key="translator.logging">true</parameter>
+    <parameter key="translator.default_path">/opt/lampp/htdocs/Alomed1/translations</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_master_requests">false</parameter>
     <parameter key="profiler.storage.dsn">file:/opt/lampp/htdocs/Alomed1/var/cache/dev/profiler</parameter>
@@ -204,8 +216,8 @@
     <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">null</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.port">25</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.host">127.0.0.1</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.username">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.password">null</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.username">sassiahmed147852@gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.password">mypass</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
@@ -379,6 +391,10 @@
         <parameter>cache</parameter>
         <parameter>@WebProfiler/Collector/cache.html.twig</parameter>
       </parameter>
+      <parameter key="data_collector.translation" type="collection">
+        <parameter>translation</parameter>
+        <parameter>@WebProfiler/Collector/translation.html.twig</parameter>
+      </parameter>
       <parameter key="data_collector.security" type="collection">
         <parameter>security</parameter>
         <parameter>@Security/Collector/security.html.twig</parameter>
@@ -418,6 +434,8 @@
       <parameter key="console.command.symfony_bundle_frameworkbundle_command_eventdispatcherdebugcommand">console.command.event_dispatcher_debug</parameter>
       <parameter key="console.command.symfony_bundle_frameworkbundle_command_routerdebugcommand">console.command.router_debug</parameter>
       <parameter key="console.command.symfony_bundle_frameworkbundle_command_routermatchcommand">console.command.router_match</parameter>
+      <parameter key="console.command.symfony_bundle_frameworkbundle_command_translationdebugcommand">console.command.translation_debug</parameter>
+      <parameter key="console.command.symfony_bundle_frameworkbundle_command_translationupdatecommand">console.command.translation_update</parameter>
       <parameter key="console.command.symfony_bundle_frameworkbundle_command_xlifflintcommand">console.command.xliff_lint</parameter>
       <parameter key="console.command.symfony_bundle_frameworkbundle_command_yamllintcommand">console.command.yaml_lint</parameter>
       <parameter key="console.command.symfony_component_form_command_debugcommand">console.command.form_debug</parameter>
@@ -469,6 +487,8 @@
       <parameter key="console.command.event_dispatcher_debug">true</parameter>
       <parameter key="console.command.router_debug">true</parameter>
       <parameter key="console.command.router_match">true</parameter>
+      <parameter key="console.command.translation_debug">true</parameter>
+      <parameter key="console.command.translation_update">true</parameter>
       <parameter key="console.command.xliff_lint">true</parameter>
       <parameter key="console.command.yaml_lint">true</parameter>
       <parameter key="console.command.form_debug">true</parameter>
@@ -655,9 +675,10 @@
     </service>
     <service id="fragment.renderer.hinclude" class="Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer">
       <tag name="kernel.fragment_renderer" alias="hinclude"/>
+      <tag name="kernel.fragment_renderer" alias="hinclude"/>
       <argument type="service" id="twig"/>
       <argument type="service" id="uri_signer"/>
-      <argument></argument>
+      <argument>null</argument>
       <call method="setFragmentPath">
         <argument>/_fragment</argument>
       </call>
@@ -752,6 +773,29 @@
       <argument type="service" id="router.default"/>
       <call method="setName">
         <argument>router:match</argument>
+      </call>
+    </service>
+    <service id="console.command.translation_debug" class="Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand" public="false">
+      <tag name="console.command" command="debug:translation"/>
+      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>/opt/lampp/htdocs/Alomed1/translations</argument>
+      <argument>/opt/lampp/htdocs/Alomed1/templates</argument>
+      <call method="setName">
+        <argument>debug:translation</argument>
+      </call>
+    </service>
+    <service id="console.command.translation_update" class="Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand" public="false">
+      <tag name="console.command" command="translation:update"/>
+      <argument type="service" id="translation.writer"/>
+      <argument type="service" id="translation.reader"/>
+      <argument type="service" id="translation.extractor"/>
+      <argument>en</argument>
+      <argument>/opt/lampp/htdocs/Alomed1/translations</argument>
+      <argument>/opt/lampp/htdocs/Alomed1/templates</argument>
+      <call method="setName">
+        <argument>translation:update</argument>
       </call>
     </service>
     <service id="console.command.xliff_lint" class="Symfony\Bundle\FrameworkBundle\Command\XliffLintCommand" public="false">
@@ -914,9 +958,6 @@
         <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
-    <service id="translator" class="Symfony\Component\Translation\IdentityTranslator" public="true">
-      <argument type="service" id="translator.selector"/>
-    </service>
     <service id="translator.selector" class="Symfony\Component\Translation\MessageSelector" public="false"/>
     <service id="2_ServiceLocator~kbk_em7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -1062,7 +1103,7 @@
     </service>
     <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType" public="true">
       <tag name="form.type"/>
-      <argument type="service" id="translator" on-invalid="ignore"/>
+      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
     </service>
     <service id="form.type.hidden" class="Symfony\Component\Form\Extension\Core\Type\HiddenType" public="true">
       <deprecated>The "%service_id%" service is deprecated since Symfony 3.1 and will be removed in 4.0.</deprecated>
@@ -1129,7 +1170,7 @@
     </service>
     <service id="form.type_extension.form.transformation_failure_handling" class="Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension" public="false">
       <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
-      <argument type="service" id="translator" on-invalid="ignore"/>
+      <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
     </service>
     <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension">
       <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
@@ -1153,7 +1194,7 @@
     </service>
     <service id="form.type_extension.upload.validator" class="Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension">
       <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
-      <argument type="service" id="translator"/>
+      <argument type="service" id="translator.data_collector"/>
       <argument>validators</argument>
     </service>
     <service id="deprecated.form.registry" class="stdClass">
@@ -1165,7 +1206,7 @@
       <argument type="service" id="security.csrf.token_manager"/>
       <argument>true</argument>
       <argument>_token</argument>
-      <argument type="service" id="translator" on-invalid="null"/>
+      <argument type="service" id="translator.data_collector" on-invalid="null"/>
       <argument>validators</argument>
       <argument type="service" id="form.server_params"/>
     </service>
@@ -1208,6 +1249,45 @@
       <argument type="service" id="assets.empty_version_strategy"/>
       <argument type="service" id="assets.context"/>
     </service>
+    <service id="templating.engine.delegating" class="Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="collection"/>
+    </service>
+    <service id="templating.name_parser" class="Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser">
+      <argument type="service" id="kernel"/>
+    </service>
+    <service id="templating.filename_parser" class="Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser"/>
+    <service id="templating.locator" class="Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator" public="false">
+      <argument type="service" id="file_locator"/>
+      <argument>/opt/lampp/htdocs/Alomed1/var/cache/dev</argument>
+    </service>
+    <service id="templating.finder" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder" public="false">
+      <argument type="service" id="kernel"/>
+      <argument type="service" id="templating.filename_parser"/>
+      <argument>/opt/lampp/htdocs/Alomed1/app/Resources</argument>
+    </service>
+    <service id="templating.cache_warmer.template_paths" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer" public="false">
+      <tag name="kernel.cache_warmer" priority="20"/>
+      <argument type="service" id="templating.finder"/>
+      <argument type="service" id="templating.locator"/>
+    </service>
+    <service id="templating.loader.filesystem" class="Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader" public="false">
+      <argument type="service" id="templating.locator"/>
+    </service>
+    <service id="templating.loader.cache" class="Symfony\Component\Templating\Loader\CacheLoader" public="false">
+      <tag name="monolog.logger" channel="templating"/>
+      <argument type="service" id="templating.loader.wrapped"/>
+      <argument>null</argument>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.templating" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="templating.loader.chain" class="Symfony\Component\Templating\Loader\ChainLoader" public="false">
+      <tag name="monolog.logger" channel="templating"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.templating" on-invalid="ignore"/>
+      </call>
+    </service>
     <service id="2_ApcCache~cl0ru39" class="Doctrine\Common\Cache\ApcCache" public="false">
       <call method="setNamespace">
         <argument></argument>
@@ -1223,7 +1303,7 @@
         <argument type="service" id="validator.validator_factory"/>
       </call>
       <call method="setTranslator">
-        <argument type="service" id="translator" on-invalid="ignore"/>
+        <argument type="service" id="translator.data_collector" on-invalid="ignore"/>
       </call>
       <call method="setTranslationDomain">
         <argument>validators</argument>
@@ -1275,6 +1355,575 @@
       <argument type="service" id="uri_signer"/>
       <argument>/_fragment</argument>
     </service>
+    <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
+      <argument type="service" id="service_locator.yepb.pt"/>
+      <argument type="service" id="translator.formatter.default"/>
+      <argument>en</argument>
+      <argument type="collection">
+        <argument key="translation.loader.php" type="collection">
+          <argument>php</argument>
+        </argument>
+        <argument key="translation.loader.yml" type="collection">
+          <argument>yaml</argument>
+          <argument>yml</argument>
+        </argument>
+        <argument key="translation.loader.xliff" type="collection">
+          <argument>xlf</argument>
+          <argument>xliff</argument>
+        </argument>
+        <argument key="translation.loader.po" type="collection">
+          <argument>po</argument>
+        </argument>
+        <argument key="translation.loader.mo" type="collection">
+          <argument>mo</argument>
+        </argument>
+        <argument key="translation.loader.qt" type="collection">
+          <argument>ts</argument>
+        </argument>
+        <argument key="translation.loader.csv" type="collection">
+          <argument>csv</argument>
+        </argument>
+        <argument key="translation.loader.res" type="collection">
+          <argument>res</argument>
+        </argument>
+        <argument key="translation.loader.dat" type="collection">
+          <argument>dat</argument>
+        </argument>
+        <argument key="translation.loader.ini" type="collection">
+          <argument>ini</argument>
+        </argument>
+        <argument key="translation.loader.json" type="collection">
+          <argument>json</argument>
+        </argument>
+      </argument>
+      <argument type="collection">
+        <argument key="cache_dir">/opt/lampp/htdocs/Alomed1/var/cache/dev/translations</argument>
+        <argument key="debug">true</argument>
+        <argument key="resource_files" type="collection">
+          <argument key="af" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ar.xlf</argument>
+          </argument>
+          <argument key="az" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.az.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.az.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.az.xlf</argument>
+          </argument>
+          <argument key="be" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.be.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.be.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.be.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.bg.xlf</argument>
+          </argument>
+          <argument key="bs" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bs.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bs.xlf</argument>
+          </argument>
+          <argument key="ca" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ca.xlf</argument>
+          </argument>
+          <argument key="cs" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.cs.xlf</argument>
+          </argument>
+          <argument key="cy" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.da.xlf</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.de.xlf</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.el.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.el.xlf</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.en.xlf</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.es.xlf</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.eu.xlf</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.fa.xlf</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.fi.xlf</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.fr.xlf</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.gl.xlf</argument>
+          </argument>
+          <argument key="he" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.he.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.hr.xlf</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.hu.xlf</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.id.xlf</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.it.xlf</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ja.xlf</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lb.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lt.xlf</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lv.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.lv.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.nb.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.nl.xlf</argument>
+          </argument>
+          <argument key="nn" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nn.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nn.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.nn.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.no.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.no.xlf</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pl.xlf</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pt_BR.xlf</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ro.xlf</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.ru.xlf</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sk.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sl.xlf</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sq.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sq.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.sv.xlf</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.th.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.th.xlf</argument>
+          </argument>
+          <argument key="tl" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.tl.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.tl.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.tr.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.tr.xlf</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.uk.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.uk.xlf</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.vi.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.vi.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.vi.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.zh_CN.xlf</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_TW.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_TW.xlf</argument>
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.zh_TW.xlf</argument>
+          </argument>
+          <argument key="pt_PT" type="collection">
+            <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Resources/translations/security.pt_PT.xlf</argument>
+          </argument>
+        </argument>
+      </argument>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+      <call method="setFallbackLocales">
+        <argument type="collection">
+          <argument>en</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="translator.logging" class="Symfony\Component\Translation\LoggingTranslator" public="false">
+      <tag name="monolog.logger" channel="translation"/>
+      <argument type="service" id="translator.default"/>
+      <argument type="service" id="monolog.logger.translation"/>
+    </service>
+    <service id="translator.formatter.default" class="Symfony\Component\Translation\Formatter\MessageFormatter" public="false">
+      <argument type="service" id="translator.selector"/>
+    </service>
+    <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
+      <tag name="translation.loader" alias="php"/>
+    </service>
+    <service id="translation.loader.yml" class="Symfony\Component\Translation\Loader\YamlFileLoader">
+      <tag name="translation.loader" alias="yaml" legacy_alias="yml" legacy-alias="yml"/>
+    </service>
+    <service id="translation.loader.xliff" class="Symfony\Component\Translation\Loader\XliffFileLoader">
+      <tag name="translation.loader" alias="xlf" legacy_alias="xliff" legacy-alias="xliff"/>
+    </service>
+    <service id="translation.loader.po" class="Symfony\Component\Translation\Loader\PoFileLoader">
+      <tag name="translation.loader" alias="po"/>
+    </service>
+    <service id="translation.loader.mo" class="Symfony\Component\Translation\Loader\MoFileLoader">
+      <tag name="translation.loader" alias="mo"/>
+    </service>
+    <service id="translation.loader.qt" class="Symfony\Component\Translation\Loader\QtFileLoader">
+      <tag name="translation.loader" alias="ts"/>
+    </service>
+    <service id="translation.loader.csv" class="Symfony\Component\Translation\Loader\CsvFileLoader">
+      <tag name="translation.loader" alias="csv"/>
+    </service>
+    <service id="translation.loader.res" class="Symfony\Component\Translation\Loader\IcuResFileLoader">
+      <tag name="translation.loader" alias="res"/>
+    </service>
+    <service id="translation.loader.dat" class="Symfony\Component\Translation\Loader\IcuDatFileLoader">
+      <tag name="translation.loader" alias="dat"/>
+    </service>
+    <service id="translation.loader.ini" class="Symfony\Component\Translation\Loader\IniFileLoader">
+      <tag name="translation.loader" alias="ini"/>
+    </service>
+    <service id="translation.loader.json" class="Symfony\Component\Translation\Loader\JsonFileLoader">
+      <tag name="translation.loader" alias="json"/>
+    </service>
+    <service id="translation.dumper.php" class="Symfony\Component\Translation\Dumper\PhpFileDumper">
+      <tag name="translation.dumper" alias="php"/>
+    </service>
+    <service id="translation.dumper.xliff" class="Symfony\Component\Translation\Dumper\XliffFileDumper">
+      <tag name="translation.dumper" alias="xlf"/>
+    </service>
+    <service id="translation.dumper.po" class="Symfony\Component\Translation\Dumper\PoFileDumper">
+      <tag name="translation.dumper" alias="po"/>
+    </service>
+    <service id="translation.dumper.mo" class="Symfony\Component\Translation\Dumper\MoFileDumper">
+      <tag name="translation.dumper" alias="mo"/>
+    </service>
+    <service id="translation.dumper.yml" class="Symfony\Component\Translation\Dumper\YamlFileDumper">
+      <tag name="translation.dumper" alias="yml"/>
+    </service>
+    <service id="translation.dumper.yaml" class="Symfony\Component\Translation\Dumper\YamlFileDumper" public="false">
+      <tag name="translation.dumper" alias="yaml"/>
+      <argument>yaml</argument>
+    </service>
+    <service id="translation.dumper.qt" class="Symfony\Component\Translation\Dumper\QtFileDumper">
+      <tag name="translation.dumper" alias="ts"/>
+    </service>
+    <service id="translation.dumper.csv" class="Symfony\Component\Translation\Dumper\CsvFileDumper">
+      <tag name="translation.dumper" alias="csv"/>
+    </service>
+    <service id="translation.dumper.ini" class="Symfony\Component\Translation\Dumper\IniFileDumper">
+      <tag name="translation.dumper" alias="ini"/>
+    </service>
+    <service id="translation.dumper.json" class="Symfony\Component\Translation\Dumper\JsonFileDumper">
+      <tag name="translation.dumper" alias="json"/>
+    </service>
+    <service id="translation.dumper.res" class="Symfony\Component\Translation\Dumper\IcuResFileDumper">
+      <tag name="translation.dumper" alias="res"/>
+    </service>
+    <service id="translation.extractor.php" class="Symfony\Component\Translation\Extractor\PhpExtractor">
+      <tag name="translation.extractor" alias="php"/>
+    </service>
+    <service id="translation.loader" class="Symfony\Bundle\FrameworkBundle\Translation\TranslationLoader">
+      <call method="addLoader">
+        <argument>php</argument>
+        <argument type="service" id="translation.loader.php"/>
+      </call>
+      <call method="addLoader">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>yml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>xliff</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>po</argument>
+        <argument type="service" id="translation.loader.po"/>
+      </call>
+      <call method="addLoader">
+        <argument>mo</argument>
+        <argument type="service" id="translation.loader.mo"/>
+      </call>
+      <call method="addLoader">
+        <argument>ts</argument>
+        <argument type="service" id="translation.loader.qt"/>
+      </call>
+      <call method="addLoader">
+        <argument>csv</argument>
+        <argument type="service" id="translation.loader.csv"/>
+      </call>
+      <call method="addLoader">
+        <argument>res</argument>
+        <argument type="service" id="translation.loader.res"/>
+      </call>
+      <call method="addLoader">
+        <argument>dat</argument>
+        <argument type="service" id="translation.loader.dat"/>
+      </call>
+      <call method="addLoader">
+        <argument>ini</argument>
+        <argument type="service" id="translation.loader.ini"/>
+      </call>
+      <call method="addLoader">
+        <argument>json</argument>
+        <argument type="service" id="translation.loader.json"/>
+      </call>
+      <deprecated>The "%service_id%" service is deprecated since Symfony 3.4 and will be removed in 4.0. Use "translation.reader" instead.</deprecated>
+    </service>
+    <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader">
+      <call method="addLoader">
+        <argument>php</argument>
+        <argument type="service" id="translation.loader.php"/>
+      </call>
+      <call method="addLoader">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>yml</argument>
+        <argument type="service" id="translation.loader.yml"/>
+      </call>
+      <call method="addLoader">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>xliff</argument>
+        <argument type="service" id="translation.loader.xliff"/>
+      </call>
+      <call method="addLoader">
+        <argument>po</argument>
+        <argument type="service" id="translation.loader.po"/>
+      </call>
+      <call method="addLoader">
+        <argument>mo</argument>
+        <argument type="service" id="translation.loader.mo"/>
+      </call>
+      <call method="addLoader">
+        <argument>ts</argument>
+        <argument type="service" id="translation.loader.qt"/>
+      </call>
+      <call method="addLoader">
+        <argument>csv</argument>
+        <argument type="service" id="translation.loader.csv"/>
+      </call>
+      <call method="addLoader">
+        <argument>res</argument>
+        <argument type="service" id="translation.loader.res"/>
+      </call>
+      <call method="addLoader">
+        <argument>dat</argument>
+        <argument type="service" id="translation.loader.dat"/>
+      </call>
+      <call method="addLoader">
+        <argument>ini</argument>
+        <argument type="service" id="translation.loader.ini"/>
+      </call>
+      <call method="addLoader">
+        <argument>json</argument>
+        <argument type="service" id="translation.loader.json"/>
+      </call>
+    </service>
+    <service id="translation.extractor" class="Symfony\Component\Translation\Extractor\ChainExtractor">
+      <call method="addExtractor">
+        <argument>php</argument>
+        <argument type="service" id="translation.extractor.php"/>
+      </call>
+      <call method="addExtractor">
+        <argument>twig</argument>
+        <argument type="service" id="twig.translation.extractor"/>
+      </call>
+    </service>
+    <service id="translation.writer" class="Symfony\Component\Translation\Writer\TranslationWriter">
+      <call method="addDumper">
+        <argument>php</argument>
+        <argument type="service" id="translation.dumper.php"/>
+      </call>
+      <call method="addDumper">
+        <argument>xlf</argument>
+        <argument type="service" id="translation.dumper.xliff"/>
+      </call>
+      <call method="addDumper">
+        <argument>po</argument>
+        <argument type="service" id="translation.dumper.po"/>
+      </call>
+      <call method="addDumper">
+        <argument>mo</argument>
+        <argument type="service" id="translation.dumper.mo"/>
+      </call>
+      <call method="addDumper">
+        <argument>yml</argument>
+        <argument type="service" id="translation.dumper.yml"/>
+      </call>
+      <call method="addDumper">
+        <argument>yaml</argument>
+        <argument type="service" id="translation.dumper.yaml"/>
+      </call>
+      <call method="addDumper">
+        <argument>ts</argument>
+        <argument type="service" id="translation.dumper.qt"/>
+      </call>
+      <call method="addDumper">
+        <argument>csv</argument>
+        <argument type="service" id="translation.dumper.csv"/>
+      </call>
+      <call method="addDumper">
+        <argument>ini</argument>
+        <argument type="service" id="translation.dumper.ini"/>
+      </call>
+      <call method="addDumper">
+        <argument>json</argument>
+        <argument type="service" id="translation.dumper.json"/>
+      </call>
+      <call method="addDumper">
+        <argument>res</argument>
+        <argument type="service" id="translation.dumper.res"/>
+      </call>
+    </service>
+    <service id="translation.warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer" public="false">
+      <tag name="kernel.cache_warmer"/>
+      <tag name="container.service_subscriber" key="translator" id="translator.logging.inner"/>
+      <argument type="service" id="service_locator.s.m3yzc.translation.warmer"/>
+    </service>
+    <service id="translator_listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="translator.data_collector"/>
+      <argument type="service" id="request_stack"/>
+    </service>
     <service id="profiler" class="Symfony\Component\HttpKernel\Profiler\Profiler" public="true">
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="kernel.reset" method="reset"/>
@@ -1313,6 +1962,9 @@
       </call>
       <call method="add">
         <argument type="service" id="data_collector.cache"/>
+      </call>
+      <call method="add">
+        <argument type="service" id="data_collector.translation"/>
       </call>
       <call method="add">
         <argument type="service" id="data_collector.security"/>
@@ -1426,6 +2078,13 @@
     <service id="data_collector.validator" class="Symfony\Component\Validator\DataCollector\ValidatorDataCollector" public="false">
       <tag name="data_collector" template="@WebProfiler/Collector/validator.html.twig" id="validator" priority="320"/>
       <argument type="service" id="debug.validator"/>
+    </service>
+    <service id="translator.data_collector" class="Symfony\Component\Translation\DataCollectorTranslator" public="false">
+      <argument type="service" id="translator.logging"/>
+    </service>
+    <service id="data_collector.translation" class="Symfony\Component\Translation\DataCollector\TranslationDataCollector">
+      <tag name="data_collector" template="@WebProfiler/Collector/translation.html.twig" id="translation" priority="275"/>
+      <argument type="service" id="translator.data_collector"/>
     </service>
     <service id="cache_connection.gd_mszc" class="Symfony\Component\Cache\Adapter\AbstractAdapter" public="false">
       <argument>redis://localhost</argument>
@@ -1585,6 +2244,22 @@
           <argument>onKernelRequest</argument>
         </argument>
         <argument>48</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="translator_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>10</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service" id="translator_listener"/>
+          <argument>onKernelFinishRequest</argument>
+        </argument>
+        <argument>0</argument>
       </call>
       <call method="addListener">
         <argument>kernel.response</argument>
@@ -1948,7 +2623,7 @@
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\TemplateController" class="Symfony\Bundle\FrameworkBundle\Controller\TemplateController" public="true">
       <argument type="service" id="twig" on-invalid="ignore"/>
-      <argument>null</argument>
+      <argument type="service" id="templating.engine.twig" on-invalid="ignore"/>
     </service>
     <service id="routing.loader.annotation" class="Symfony\Bundle\FrameworkBundle\Routing\AnnotatedRouteControllerLoader" public="false">
       <tag name="routing.loader" priority="-10"/>
@@ -2032,6 +2707,7 @@
     </service>
     <service id="security.authentication.manager" class="Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager" public="false">
       <argument type="iterator">
+        <argument type="service" id="security.authentication.provider.dao.main"/>
         <argument type="service" id="security.authentication.provider.anonymous.main"/>
       </argument>
       <argument>true</argument>
@@ -2447,6 +3123,7 @@
       <argument></argument>
       <argument></argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <argument>true</argument>
     </service>
     <service id="debug.security.access.decision_manager" class="Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager" public="false">
       <argument type="service" id="debug.security.access.decision_manager.inner"/>
@@ -2493,10 +3170,11 @@
       <argument>false</argument>
       <argument>security.user.provider.concrete.in_memory</argument>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument>security.authentication.form_entry_point.main</argument>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="collection">
+        <argument>form_login</argument>
         <argument>anonymous</argument>
       </argument>
       <argument>null</argument>
@@ -2514,6 +3192,72 @@
         <argument>true</argument>
       </call>
     </service>
+    <service id="security.authentication.provider.dao.main" class="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider" public="false">
+      <argument type="service" id="security.user.provider.concrete.in_memory"/>
+      <argument type="service" id="security.user_checker"/>
+      <argument>main</argument>
+      <argument type="service" id="security.encoder_factory.generic"/>
+      <argument>true</argument>
+    </service>
+    <service id="security.authentication.success_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler" public="false">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">login</argument>
+          <argument key="always_use_default_target_path">false</argument>
+          <argument key="default_target_path">/</argument>
+          <argument key="target_path_parameter">_target_path</argument>
+          <argument key="use_referer">false</argument>
+        </argument>
+      </call>
+      <call method="setProviderKey">
+        <argument>main</argument>
+      </call>
+    </service>
+    <service id="security.authentication.failure_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler" public="false">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">login</argument>
+          <argument key="failure_path">null</argument>
+          <argument key="failure_forward">false</argument>
+          <argument key="failure_path_parameter">_failure_path</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="security.authentication.listener.form.main" class="Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener" public="false">
+      <tag name="security.remember_me_aware" id="main" provider="security.user.provider.concrete.in_memory"/>
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.authentication.manager"/>
+      <argument type="service" id="security.authentication.session_strategy"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>main</argument>
+      <argument type="service" id="security.authentication.success_handler.main.form_login"/>
+      <argument type="service" id="security.authentication.failure_handler.main.form_login"/>
+      <argument type="collection">
+        <argument key="check_path">login</argument>
+        <argument key="use_forward">false</argument>
+        <argument key="require_previous_session">false</argument>
+        <argument key="username_parameter">_username</argument>
+        <argument key="password_parameter">_password</argument>
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">authenticate</argument>
+        <argument key="post_only">true</argument>
+      </argument>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
+      <argument>null</argument>
+    </service>
+    <service id="security.authentication.form_entry_point.main" class="Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint" public="false">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>login</argument>
+      <argument>false</argument>
+    </service>
     <service id="security.authentication.listener.anonymous.main" class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
       <argument type="service" id="security.token_storage"/>
       <argument>%container.build_hash%</argument>
@@ -2528,7 +3272,7 @@
       <argument type="service" id="security.authentication.trust_resolver"/>
       <argument type="service" id="security.http_utils"/>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument type="service" id="security.authentication.form_entry_point.main"/>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -2538,6 +3282,7 @@
       <argument type="iterator">
         <argument type="service" id="security.channel_listener"/>
         <argument type="service" id="security.context_listener.0"/>
+        <argument type="service" id="security.authentication.listener.form.main"/>
         <argument type="service" id="security.authentication.listener.anonymous.main"/>
         <argument type="service" id="security.access_listener"/>
       </argument>
@@ -2561,7 +3306,7 @@
       </call>
     </service>
     <service id="twig" class="Twig\Environment" public="true">
-      <argument type="service" id="twig.loader.native_filesystem"/>
+      <argument type="service" id="twig.loader.filesystem"/>
       <argument type="collection">
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -2644,7 +3389,7 @@
       <tag name="kernel.cache_warmer"/>
       <tag name="container.service_subscriber" id="twig"/>
       <argument type="service" id="service_locator.c7_qahl.twig.cache_warmer"/>
-      <argument>null</argument>
+      <argument type="service" id="templating.finder" on-invalid="ignore"/>
       <argument type="collection">
         <argument key="/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form">null</argument>
       </argument>
@@ -2664,7 +3409,6 @@
       <argument type="service" id="twig.template_iterator"/>
     </service>
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader" public="false">
-      <tag name="twig.loader"/>
       <argument type="collection"/>
       <argument>/opt/lampp/htdocs/Alomed1</argument>
       <call method="addPath">
@@ -2716,6 +3460,14 @@
         <argument>!alomed</argument>
       </call>
       <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/HotelBundle/Resources/views</argument>
+        <argument>Hotel</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/HotelBundle/Resources/views</argument>
+        <argument>!Hotel</argument>
+      </call>
+      <call method="addPath">
         <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -2752,7 +3504,7 @@
     </service>
     <service id="twig.extension.trans" class="Symfony\Bridge\Twig\Extension\TranslationExtension" public="false">
       <tag name="twig.extension"/>
-      <argument type="service" id="translator" on-invalid="null"/>
+      <argument type="service" id="translator.data_collector" on-invalid="null"/>
     </service>
     <service id="twig.extension.assets" class="Symfony\Bridge\Twig\Extension\AssetExtension" public="false">
       <tag name="twig.extension"/>
@@ -2840,6 +3592,95 @@
       <tag name="twig.runtime"/>
       <argument type="service" id="twig.form.engine"/>
       <argument type="service" id="security.csrf.token_manager" on-invalid="null"/>
+    </service>
+    <service id="twig.loader.filesystem" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader" public="false">
+      <tag name="twig.loader"/>
+      <argument type="service" id="templating.locator"/>
+      <argument type="service" id="templating.name_parser"/>
+      <argument>/opt/lampp/htdocs/Alomed1</argument>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views</argument>
+        <argument>Framework</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views</argument>
+        <argument>!Framework</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views</argument>
+        <argument>Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views</argument>
+        <argument>!Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views</argument>
+        <argument>Twig</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views</argument>
+        <argument>!Twig</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
+        <argument>Swiftmailer</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
+        <argument>!Swiftmailer</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/doctrine/doctrine-bundle/Resources/views</argument>
+        <argument>Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/doctrine/doctrine-bundle/Resources/views</argument>
+        <argument>!Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/alomedBundle/Resources/views</argument>
+        <argument>alomed</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/alomedBundle/Resources/views</argument>
+        <argument>!alomed</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/HotelBundle/Resources/views</argument>
+        <argument>Hotel</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/src/HotelBundle/Resources/views</argument>
+        <argument>!Hotel</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
+        <argument>Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
+        <argument>!Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
+        <argument>WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
+        <argument>!WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/app/Resources/views</argument>
+      </call>
+      <call method="addPath">
+        <argument>/opt/lampp/htdocs/Alomed1/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form</argument>
+      </call>
+    </service>
+    <service id="templating.engine.twig" class="Symfony\Bundle\TwigBundle\TwigEngine" public="false">
+      <argument type="service" id="twig"/>
+      <argument type="service" id="templating.name_parser"/>
+      <argument type="service" id="templating.locator"/>
     </service>
     <service id="twig.command.debug" class="Symfony\Bridge\Twig\Command\DebugCommand" public="false">
       <tag name="console.command" command="debug:twig"/>
@@ -2976,10 +3817,10 @@
         <argument type="service" id="3_Swift_Transport_Esmtp_Auth_PlainAuthenticator~bins7st"/>
       </argument>
       <call method="setUsername">
-        <argument>null</argument>
+        <argument>sassiahmed147852@gmail.com</argument>
       </call>
       <call method="setPassword">
-        <argument>null</argument>
+        <argument>mypass</argument>
       </call>
       <call method="setAuthMode">
         <argument>null</argument>
@@ -3307,6 +4148,7 @@
       <call method="setEntityNamespaces">
         <argument type="collection">
           <argument key="alomedBundle">alomedBundle\Entity</argument>
+          <argument key="HotelBundle">HotelBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -3353,12 +4195,17 @@
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
         <argument>/opt/lampp/htdocs/Alomed1/src/alomedBundle/Entity</argument>
+        <argument>/opt/lampp/htdocs/Alomed1/src/HotelBundle/Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>alomedBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>HotelBundle\Entity</argument>
       </call>
     </service>
     <service id="doctrine_cache.providers.doctrine.orm.default_metadata_cache" class="Doctrine\Common\Cache\ArrayCache" public="true">
@@ -3627,6 +4474,22 @@
         <argument key="validator.expression" type="service" id="validator.expression"/>
       </argument>
     </service>
+    <service id="service_locator.yepb.pt" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translation.loader.csv" type="service" id="translation.loader.csv"/>
+        <argument key="translation.loader.dat" type="service" id="translation.loader.dat"/>
+        <argument key="translation.loader.ini" type="service" id="translation.loader.ini"/>
+        <argument key="translation.loader.json" type="service" id="translation.loader.json"/>
+        <argument key="translation.loader.mo" type="service" id="translation.loader.mo"/>
+        <argument key="translation.loader.php" type="service" id="translation.loader.php"/>
+        <argument key="translation.loader.po" type="service" id="translation.loader.po"/>
+        <argument key="translation.loader.qt" type="service" id="translation.loader.qt"/>
+        <argument key="translation.loader.res" type="service" id="translation.loader.res"/>
+        <argument key="translation.loader.xliff" type="service" id="translation.loader.xliff"/>
+        <argument key="translation.loader.yml" type="service" id="translation.loader.yml"/>
+      </argument>
+    </service>
     <service id="service_locator.o0cobhk" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3675,6 +4538,36 @@
     </service>
     <service id="monolog.logger.cache" class="Symfony\Bridge\Monolog\Logger">
       <argument>cache</argument>
+      <call method="pushProcessor">
+        <argument type="service" id="debug.log_processor"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.server_log"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+    </service>
+    <service id="monolog.logger.templating" class="Symfony\Bridge\Monolog\Logger">
+      <argument>templating</argument>
+      <call method="pushProcessor">
+        <argument type="service" id="debug.log_processor"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.server_log"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+    </service>
+    <service id="monolog.logger.translation" class="Symfony\Bridge\Monolog\Logger">
+      <argument>translation</argument>
       <call method="pushProcessor">
         <argument type="service" id="debug.log_processor"/>
       </call>
@@ -3755,6 +4648,17 @@
       </call>
     </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
+    <service id="service_locator.s.m3yzc" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="translator" type="service" id="translator.default"/>
+      </argument>
+    </service>
+    <service id="service_locator.s.m3yzc.translation.warmer" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <argument>translation.warmer</argument>
+      <argument type="service" id="service_container"/>
+      <factory service="service_locator.s.m3yzc" method="withContext"/>
+    </service>
     <service id="service_locator.lluwcxp" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3822,7 +4726,7 @@
       <argument>true</argument>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id="service_locator.iv.jde6"/>
+      <argument type="service" id="service_locator.fk_lx8i"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -3837,6 +4741,8 @@
         <argument key="debug:event-dispatcher">console.command.event_dispatcher_debug</argument>
         <argument key="debug:router">console.command.router_debug</argument>
         <argument key="router:match">console.command.router_match</argument>
+        <argument key="debug:translation">console.command.translation_debug</argument>
+        <argument key="translation:update">console.command.translation_update</argument>
         <argument key="lint:xliff">console.command.xliff_lint</argument>
         <argument key="lint:yaml">console.command.yaml_lint</argument>
         <argument key="debug:form">console.command.form_debug</argument>
@@ -3871,7 +4777,7 @@
         <argument key="server:log">web_server.command.server_log</argument>
       </argument>
     </service>
-    <service id="service_locator.iv.jde6" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id="service_locator.fk_lx8i" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -3888,6 +4794,8 @@
         <argument key="console.command.form_debug" type="service" id="console.command.form_debug"/>
         <argument key="console.command.router_debug" type="service" id="console.command.router_debug"/>
         <argument key="console.command.router_match" type="service" id="console.command.router_match"/>
+        <argument key="console.command.translation_debug" type="service" id="console.command.translation_debug"/>
+        <argument key="console.command.translation_update" type="service" id="console.command.translation_update"/>
         <argument key="console.command.xliff_lint" type="service" id="console.command.xliff_lint"/>
         <argument key="console.command.yaml_lint" type="service" id="console.command.yaml_lint"/>
         <argument key="doctrine.cache_clear_metadata_command" type="service" id="doctrine.cache_clear_metadata_command"/>
@@ -3979,7 +4887,7 @@
     <service id="cache.app_clearer" alias="cache.default_clearer" public="true"/>
     <service id="Psr\Cache\CacheItemPoolInterface" alias="cache.app" public="false"/>
     <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app" public="false"/>
-    <service id="Symfony\Component\Translation\TranslatorInterface" alias="translator" public="false"/>
+    <service id="Symfony\Component\Translation\TranslatorInterface" alias="translator.data_collector" public="false"/>
     <service id="Symfony\Component\HttpFoundation\Session\SessionInterface" alias="session" public="false"/>
     <service id="Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface" alias="session.storage.native" public="false"/>
     <service id="SessionHandlerInterface" alias="session.handler.native_file" public="false"/>
@@ -3996,8 +4904,12 @@
     <service id="form.property_accessor" alias="property_accessor" public="false"/>
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached" public="false"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages" public="false"/>
+    <service id="templating.loader" alias="templating.loader.filesystem" public="true"/>
+    <service id="templating" alias="templating.engine.twig" public="true"/>
     <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="debug.validator" public="false"/>
     <service id="validator.mapping.class_metadata_factory" alias="debug.validator" public="false"/>
+    <service id="translator" alias="translator.data_collector" public="true"/>
+    <service id="translator.formatter" alias="translator.formatter.default" public="false"/>
     <service id="cache.default_redis_provider" alias="cache_connection.gd_mszc" public="false"/>
     <service id="cache.default_memcached_provider" alias="cache_connection.jke6kex" public="false"/>
     <service id="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" alias="debug.file_link_formatter" public="false"/>
@@ -4060,11 +4972,14 @@
     <service id="doctrine.orm.default_entity_manager.event_manager" alias="doctrine.dbal.default_connection.event_manager" public="false"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default" public="false"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default" public="false"/>
-    <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="twig.loader" alias="twig.loader.native_filesystem"/>
+    <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
+    <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
+    <service id="twig.loader" alias="twig.loader.filesystem"/>
     <service id="service_locator._fpuy7b" alias="2_ServiceLocator~kbk_em7" public="false"/>
     <service id="service_locator.ml7rum7" alias="1_ServiceLocator~xhqiiyq" public="false"/>
     <service id="validator" alias="debug.validator" public="true"/>
+    <service id="translator.logging.inner" alias="translator.default" public="false"/>
+    <service id="translator.data_collector.inner" alias="translator.logging" public="false"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver" public="false"/>
     <service id="argument_resolver" alias="debug.argument_resolver" public="false"/>

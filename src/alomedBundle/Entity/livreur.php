@@ -3,13 +3,13 @@
 
 namespace alomedBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use  Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class livreur
  * @package alomedBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="alomedBundle\Repository\LivreurRepository")
  */
 class livreur
 {
@@ -24,6 +24,8 @@ class livreur
      * @ORM\Column (type="string",length=255)
      */
     private $nom;
+
+
     /**
      * @ORM\Column (type="string",length=255)
      */
@@ -36,6 +38,7 @@ class livreur
     /**
      * @ORM\OneToMany(targetEntity="alomedBundle\Entity\Livraison", mappedBy="livreur",orphanRemoval=true)
      */
+
     private $livraisons;
     public function __construct()
     {
@@ -48,6 +51,22 @@ class livreur
     public function getDateDeNaissance()
     {
         return $this->DateDeNaissance;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLivraisons()
+    {
+        return $this->livraisons;
+    }
+
+    /**
+     * @param ArrayCollection $livraisons
+     */
+    public function setLivraisons($livraisons)
+    {
+        $this->livraisons = $livraisons;
     }
 
     /**

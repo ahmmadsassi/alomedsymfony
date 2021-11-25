@@ -5,6 +5,7 @@ namespace alomedBundle\Controller;
 
 
 use alomedBundle\Entity\livreur;
+use alomedBundle\Entity\userid;
 use alomedBundle\Form\ModeleForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -96,4 +97,16 @@ public  function  rechrercherAction(Request  $request){
          }
     return $this->render('@alomed/pages/Rechercher.html.twig',array('livreur'=>$livreur));
 }
+
+    public function showalllivraisonAction(Request $request){
+        $userid= new userid();
+        $userid= $this->getDoctrine()->getRepository('alomedBundle:userid')->find(1);
+        $id= $userid->getToken();
+        $livreur= $this->getDoctrine()->getRepository('alomedBundle:livreur')->find($id);
+        $livraisons = $livreur->getLivraisons();
+        return $this->render('@alomed/pages/interfacelivreur.html.twig',array('livraison' => $livraisons));
+    }
+
+
+
 }

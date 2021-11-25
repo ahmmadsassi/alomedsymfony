@@ -4,10 +4,12 @@
 namespace alomedBundle\Controller;
 
 
-use alomedBundle\Entity\Medecin;
+use  alomedBundle\Entity\Medecin;
+use alomedBundle\Entity\userid;
 use alomedBundle\Form\ModeleFormMedecin;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MedecinController extends  Controller
 {
@@ -39,6 +41,20 @@ public  function  showallmedecinAction(Request  $request){
         return $this->render('@alomed/pages/viewmedecin.html.twig',array('medecin' => $medecin));
 
     }
+
+    public function showallordennanceAction(Request $request){
+
+        $userid= new userid();
+        $userid= $this->getDoctrine()->getRepository('alomedBundle:userid')->find(1);
+        $id= $userid->getToken();
+     $medecin= $this->getDoctrine()->getRepository('alomedBundle:Medecin')->find($id);
+    $ordennances = $medecin->getOrdonnances();
+
+        return $this->render('@alomed/pages/interfacemedecin.html.twig',array('ordennances' => $ordennances));
+    }
+
+
+
 
     public function deletemedecinAction(Request $request,$id)
     {

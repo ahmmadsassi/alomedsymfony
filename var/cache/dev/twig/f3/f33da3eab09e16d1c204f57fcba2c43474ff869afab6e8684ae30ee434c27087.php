@@ -92,14 +92,17 @@ class __TwigTemplate_fc0eddf2f83f10e25ab745b977519fac144bf582a6691531912ba9e2048
         <li><a href=\"";
         // line 42
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\HttpFoundationExtension')->generateAbsoluteUrl($this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("")), "html", null, true);
-        echo "app_dev.php/indexpatient\">Patient</a></li>
+        echo "app_dev.php/indexpatient\">PATIENT</a></li>
         <li>
             <a href=\"";
         // line 44
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\HttpFoundationExtension')->generateAbsoluteUrl($this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("")), "html", null, true);
         echo "app_dev.php/index\">LIVREUR</a>
         </li>
-        <li><a href=\"index.html\">|  SE DÉCONNECTER</a></li>
+        <li><a href=\"";
+        // line 46
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\HttpFoundationExtension')->generateAbsoluteUrl($this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("")), "html", null, true);
+        echo "app_dev.php/\">|  SE DÉCONNECTER</a> </li>
     </ul>
 </nav>
 <body class=\"back\" >
@@ -234,7 +237,7 @@ class __TwigTemplate_fc0eddf2f83f10e25ab745b977519fac144bf582a6691531912ba9e2048
 
     public function getDebugInfo()
     {
-        return array (  205 => 94,  201 => 92,  189 => 85,  178 => 81,  172 => 80,  166 => 79,  162 => 78,  158 => 77,  154 => 76,  150 => 75,  146 => 74,  142 => 73,  138 => 72,  133 => 71,  128 => 70,  99 => 44,  94 => 42,  89 => 40,  78 => 32,  60 => 17,  56 => 16,  52 => 15,  36 => 1,);
+        return array (  208 => 94,  204 => 92,  192 => 85,  181 => 81,  175 => 80,  169 => 79,  165 => 78,  161 => 77,  157 => 76,  153 => 75,  149 => 74,  145 => 73,  141 => 72,  136 => 71,  131 => 70,  104 => 46,  99 => 44,  94 => 42,  89 => 40,  78 => 32,  60 => 17,  56 => 16,  52 => 15,  36 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -288,11 +291,11 @@ class __TwigTemplate_fc0eddf2f83f10e25ab745b977519fac144bf582a6691531912ba9e2048
         <li>
             <a href=\"{{ absolute_url(asset('')) }}app_dev.php/indexmedecin\">MÉDECIN</a>
         </li>
-        <li><a href=\"{{ absolute_url(asset('')) }}app_dev.php/indexpatient\">Patient</a></li>
+        <li><a href=\"{{ absolute_url(asset('')) }}app_dev.php/indexpatient\">PATIENT</a></li>
         <li>
             <a href=\"{{ absolute_url(asset('')) }}app_dev.php/index\">LIVREUR</a>
         </li>
-        <li><a href=\"index.html\">|  SE DÉCONNECTER</a></li>
+        <li><a href=\"{{ absolute_url(asset('')) }}app_dev.php/\">|  SE DÉCONNECTER</a> </li>
     </ul>
 </nav>
 <body class=\"back\" >

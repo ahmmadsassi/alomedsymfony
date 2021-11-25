@@ -1,0 +1,108 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background:url('900.jpg') no-repeat;
+    background-size: 100%;
+}
+.box{
+    width: 450px;
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:rgba(0,0,0,0.7);
+    text-align: center;
+    border-radius: 50px;
+}
+.box h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight:700;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+
+
+}
+h1{
+    margin-bottom:50px;
+}
+.box input[type = "text"],.box input[type = "password"]{
+    border:0;
+    background: white;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    font-family: 'Poppins', sans-serif;
+
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+    width: 280px;
+    border-color: #e22526;
+}
+.box input[type = "submit"]{
+    border:0;
+    background: #e22526;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+.box input[type = "submit"]:hover{
+    background: #2ecc71;
+}
+.box img{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top :-50px;
+    left:calc(50% - 50px);
+}
+.box a{
+    color: #7d94ba;
+    font-family: 'Poppins', sans-serif;
+
+}
+.box a:hover{
+    color: #306ac9;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+:focus::-webkit-input-placeholder{
+    font-family: 'Poppins', sans-serif;
+
+    color: black;
+    opacity: 0;
+}
+:focus::-moz-placeholder{
+    font-family: 'Poppins', sans-serif;
+
+    color: black;
+    opacity: 0;
+}
+:focus::-ms-input-placeholder{
+    font-family: 'Poppins', sans-serif;
+
+    color: black;
+    opacity: 0;
+}
+:focus:-moz-placeholder{
+    font-family: 'Poppins', sans-serif;
+
+    color: black;
+    opacity: 0;
+}

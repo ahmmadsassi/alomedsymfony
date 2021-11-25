@@ -10,4 +10,17 @@ class DefaultController extends Controller
     {
         return $this->render('alomedBundle:Default:index.html.twig');
     }
+    public function indexaboutAction()
+    {
+        return $this->render('alomedBundle:Default:about.html.twig');
+    }
+    public function indexcontactAction()
+    {
+        return $this->render('alomedBundle:Default:contact.html.twig');
+    }
+    public function indexroleAction()
+    {
+        return $this->render('alomedBundle:Default:role.html.twig');
+    }
 }
+

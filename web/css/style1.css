@@ -1,3 +1,4 @@
+
 #a {
     size: 50px;
     color: darkred;
@@ -21,13 +22,11 @@
     background-repeat: no-repeat;
 
 }
-
-
 .container{
     margin-top: 20px;
 }
 #Liste{
-    color: royalblue;
+    color: #2b669a;
     margin-left:14%;
     margin-top: 10px;
     font-family: 'Poppins', sans-serif;
@@ -45,7 +44,6 @@ table{
     border-radius: 10px;
     box-shadow: 4px 4px 10px ;
     /*backdrop-filter: blur(2px);*/
-
 }
 
 

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Patient
  * @package alomedBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="alomedBundle\Repository\PatientRepository")
  */
 class Patient
 {
@@ -46,6 +46,22 @@ class Patient
      * @ORM\OneToMany(targetEntity="alomedBundle\Entity\Livraison", mappedBy="patient",orphanRemoval=true)
      */
     private $livraisons;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLivraisons()
+    {
+        return $this->livraisons;
+    }
+
+    /**
+     * @param ArrayCollection $livraisons
+     */
+    public function setLivraisons($livraisons)
+    {
+        $this->livraisons = $livraisons;
+    }
     /**
      * @return ArrayCollection
      */

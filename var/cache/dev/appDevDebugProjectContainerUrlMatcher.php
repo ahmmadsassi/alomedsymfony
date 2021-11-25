@@ -107,6 +107,21 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // hotel_homepage
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'HotelBundle\\Controller\\DefaultController::indexAction',  '_route' => 'hotel_homepage',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_hotel_homepage;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'hotel_homepage'));
+            }
+
+            return $ret;
+        }
+        not_hotel_homepage:
+
         // alomed_homepage
         if ('' === $trimmedPathinfo) {
             $ret = array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::indexAction',  '_route' => 'alomed_homepage',);
@@ -121,6 +136,71 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return $ret;
         }
         not_alomed_homepage:
+
+        // alomed_about
+        if ('/about' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::indexaboutAction',  '_route' => 'alomed_about',);
+        }
+
+        // alomed_contact
+        if ('/contact' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::indexcontactAction',  '_route' => 'alomed_contact',);
+        }
+
+        // alomed_role
+        if ('/role' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::indexroleAction',  '_route' => 'alomed_role',);
+        }
+
+        // rechercher_homepage
+        if ('/rech' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\LivreurController::rechrercherAction',  '_route' => 'rechercher_homepage',);
+        }
+
+        // about_homepage
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'about_homepage',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_about_homepage;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'about_homepage'));
+            }
+
+            return $ret;
+        }
+        not_about_homepage:
+
+        // role_homepage
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::roleAction',  '_route' => 'role_homepage',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_role_homepage;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'role_homepage'));
+            }
+
+            return $ret;
+        }
+        not_role_homepage:
+
+        // contact_homepage
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'alomedBundle\\Controller\\DefaultController::contactAction',  '_route' => 'contact_homepage',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_contact_homepage;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'contact_homepage'));
+            }
+
+            return $ret;
+        }
+        not_contact_homepage:
 
         if (0 === strpos($pathinfo, '/in')) {
             // index_homepage
@@ -153,11 +233,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'view_homepage']), array (  '_controller' => 'alomedBundle\\Controller\\LivreurController::getlivreurbyidAction',));
             }
 
-        }
-
-        // rechercher_homepage
-        if ('/rech' === $pathinfo) {
-            return array (  '_controller' => 'alomedBundle\\Controller\\LivreurController::rechrercherAction',  '_route' => 'rechercher_homepage',);
         }
 
         // update_homepage
@@ -196,15 +271,8 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         // pharmacie_edit
         if (preg_match('#^/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
-            $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'pharmacie_edit']), array (  '_controller' => 'alomedBundle\\Controller\\PharmacieController::editAction',));
-            if (!in_array($canonicalMethod, ['GET', 'POST'])) {
-                $allow = array_merge($allow, ['GET', 'POST']);
-                goto not_pharmacie_edit;
-            }
-
-            return $ret;
+            return $this->mergeDefaults(array_replace($matches, ['_route' => 'pharmacie_edit']), array (  '_controller' => 'alomedBundle\\Controller\\PharmacieController::editAction',));
         }
-        not_pharmacie_edit:
 
         // pharmacie_delete
         if (preg_match('#^/(?P<id>[^/]++)/delete$#sD', $pathinfo, $matches)) {
@@ -218,17 +286,43 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_pharmacie_delete:
 
-        // index_medecinhomepage
-        if ('/indexmedecin' === $pathinfo) {
-            return array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::showallmedecinAction',  '_route' => 'index_medecinhomepage',);
+        if (0 === strpos($pathinfo, '/in')) {
+            // index_medecinhomepage
+            if ('/indexmedecin' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::showallmedecinAction',  '_route' => 'index_medecinhomepage',);
+            }
+
+            // index_patienthomepage
+            if ('/indexpatient' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\PatientController::showallpatientAction',  '_route' => 'index_patienthomepage',);
+            }
+
+            if (0 === strpos($pathinfo, '/interface')) {
+                // medecin_interface
+                if ('/interfacemedecin' === $pathinfo) {
+                    return array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::showallordennanceAction',  '_route' => 'medecin_interface',);
+                }
+
+                // pharmacie_interface
+                if ('/interfacepharmacie' === $pathinfo) {
+                    return array (  '_controller' => 'alomedBundle\\Controller\\PharmacieController::showallordennancephAction',  '_route' => 'pharmacie_interface',);
+                }
+
+                // patient_interface
+                if ('/interfacepatient' === $pathinfo) {
+                    return array (  '_controller' => 'alomedBundle\\Controller\\PatientController::showalllivraisonAction',  '_route' => 'patient_interface',);
+                }
+
+                // livreur_interface
+                if ('/interfacelivreur' === $pathinfo) {
+                    return array (  '_controller' => 'alomedBundle\\Controller\\LivreurController::showalllivraisonAction',  '_route' => 'livreur_interface',);
+                }
+
+            }
+
         }
 
-        // index_patienthomepage
-        if ('/indexpatient' === $pathinfo) {
-            return array (  '_controller' => 'alomedBundle\\Controller\\PatientController::showallpatientAction',  '_route' => 'index_patienthomepage',);
-        }
-
-        if (0 === strpos($pathinfo, '/medecin')) {
+        elseif (0 === strpos($pathinfo, '/medecin')) {
             // create_medecinhomepage
             if ('/medecin' === $pathinfo) {
                 return array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::createmedecinAction',  '_route' => 'create_medecinhomepage',);
@@ -241,14 +335,22 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
-        // delete_homepagemedecin
-        if (0 === strpos($pathinfo, '/deletemedecin') && preg_match('#^/deletemedecin/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, ['_route' => 'delete_homepagemedecin']), array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::deletemedecinAction',));
-        }
+        elseif (0 === strpos($pathinfo, '/de')) {
+            // delete_homepagemedecin
+            if (0 === strpos($pathinfo, '/deletemedecin') && preg_match('#^/deletemedecin/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'delete_homepagemedecin']), array (  '_controller' => 'alomedBundle\\Controller\\MedecinController::deletemedecinAction',));
+            }
 
-        // delete_homepagepatient
-        if (0 === strpos($pathinfo, '/deletepatient') && preg_match('#^/deletepatient/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, ['_route' => 'delete_homepagepatient']), array (  '_controller' => 'alomedBundle\\Controller\\PatientController::deletepatientAction',));
+            // delete_homepagepatient
+            if (0 === strpos($pathinfo, '/deletepatient') && preg_match('#^/deletepatient/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'delete_homepagepatient']), array (  '_controller' => 'alomedBundle\\Controller\\PatientController::deletepatientAction',));
+            }
+
+            // deco_interface
+            if ('/deconcter' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\PatientController::deconctionAction',  '_route' => 'deco_interface',);
+            }
+
         }
 
         // update_homepagemedecin
@@ -272,6 +374,62 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'view_patienthomepage']), array (  '_controller' => 'alomedBundle\\Controller\\PatientController::getpatientbyidAction',));
             }
 
+        }
+
+        elseif (0 === strpos($pathinfo, '/li')) {
+            // view_patientlistelivraison
+            if ('/listelivraison' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\PharmacieController::showalllivraisonphAction',  '_route' => 'view_patientlistelivraison',);
+            }
+
+            // view_livraison
+            if (0 === strpos($pathinfo, '/livraisonview') && preg_match('#^/livraisonview/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'view_livraison']), array (  '_controller' => 'alomedBundle\\Controller\\PatientController::getlivraisonbyidAction',));
+            }
+
+            // confirmer_livraison
+            if (0 === strpos($pathinfo, '/livraisonconfirmer') && preg_match('#^/livraisonconfirmer/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'confirmer_livraison']), array (  '_controller' => 'alomedBundle\\Controller\\PatientController::livrerAction',));
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/login')) {
+            // security_login2
+            if ('/login2' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\SecuritypatientController::verifpatientAction',  '_route' => 'security_login2',);
+            }
+
+            // security_login4
+            if ('/login4' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\SecuritypatientController::veriflivreurAction',  '_route' => 'security_login4',);
+            }
+
+            // security_login1
+            if ('/login1' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\SecuritypatientController::verifadminmeAction',  '_route' => 'security_login1',);
+            }
+
+            // security_login
+            if ('/login' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\SecuritypatientController::medecinverifAction',  '_route' => 'security_login',);
+            }
+
+            // security_login3
+            if ('/login3' === $pathinfo) {
+                return array (  '_controller' => 'alomedBundle\\Controller\\SecuritypatientController::phverfifAction',  '_route' => 'security_login3',);
+            }
+
+        }
+
+        // creation
+        if ('/ordennance' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\ordennanceController::creationAction',  '_route' => 'creation',);
+        }
+
+        // createlivraison
+        if ('/createlivraison' === $pathinfo) {
+            return array (  '_controller' => 'alomedBundle\\Controller\\livraisonController::createlivraisonAction',  '_route' => 'createlivraison',);
         }
 
         // homepage
